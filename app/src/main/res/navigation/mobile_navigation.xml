@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_diary">
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="id.ac.astra.polman.sidiaryku.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_memory"
+        android:name="id.ac.astra.polman.sidiaryku.ui.memory.MemoryFragment"
+        android:label="memory_fragment"
+        tools:layout="@layout/fragment_memory" />
+    <fragment
+        android:id="@+id/navigation_diary"
+        android:name="id.ac.astra.polman.sidiaryku.ui.diary.DiaryFragment"
+        android:label="diary_fragment"
+        tools:layout="@layout/fragment_diary" />
+</navigation>

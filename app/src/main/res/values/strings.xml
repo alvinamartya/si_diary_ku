@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Si Diary Ku</string>
+    <string name="splash_screen">splash screen</string>
+    <string name="memory">Memory</string>
+    <string name="new_thought">New thought</string>
+    <string name="profile">Profile</string>
+    <string name="create_just_your">Create just your</string>
+    <string name="memories">memories</string>
+    <string name="what_made_you_lough_today">What made you lough today?</string>
+    <string name="write">Write</string>
+    <string name="write_diary_image">write diary image</string>
+</resources>

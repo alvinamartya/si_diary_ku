@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku.ui.profile;
+package id.ac.astra.polman.sidiaryku.ui.fragment.diary;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import id.ac.astra.polman.sidiaryku.R;
 
-public class ProfileFragment extends Fragment {
+public class DiaryFragment extends Fragment {
 
-    private ProfileViewModel mViewModel;
+    private DiaryViewModel mViewModel;
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
+    public static DiaryFragment newInstance() {
+        return new DiaryFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_diary, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
         // TODO: Use the ViewModel
     }
 

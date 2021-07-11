@@ -6,17 +6,17 @@
     app:startDestination="@id/navigation_diary">
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="id.ac.astra.polman.sidiaryku.ui.profile.ProfileFragment"
+        android:name="id.ac.astra.polman.sidiaryku.ui.fragment.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/navigation_memory"
-        android:name="id.ac.astra.polman.sidiaryku.ui.memory.MemoryFragment"
+        android:name="id.ac.astra.polman.sidiaryku.ui.fragment.memory.MemoryFragment"
         android:label="memory_fragment"
         tools:layout="@layout/fragment_memory" />
     <fragment
         android:id="@+id/navigation_diary"
-        android:name="id.ac.astra.polman.sidiaryku.ui.diary.DiaryFragment"
+        android:name="id.ac.astra.polman.sidiaryku.ui.fragment.diary.DiaryFragment"
         android:label="diary_fragment"
         tools:layout="@layout/fragment_diary" />
 </navigation>

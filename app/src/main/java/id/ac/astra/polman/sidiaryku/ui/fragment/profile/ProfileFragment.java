@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku.ui.memory;
+package id.ac.astra.polman.sidiaryku.ui.fragment.profile;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import id.ac.astra.polman.sidiaryku.R;
 
-public class MemoryFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private MemoryViewModel mViewModel;
+    private ProfileViewModel mViewModel;
 
-    public static MemoryFragment newInstance() {
-        return new MemoryFragment();
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_memory, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MemoryViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         // TODO: Use the ViewModel
     }
 

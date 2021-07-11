@@ -1,15 +1,16 @@
-package id.ac.astra.polman.sidiaryku;
+package id.ac.astra.polman.sidiaryku.ui.activity.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
+import id.ac.astra.polman.sidiaryku.R;
+import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
 import id.ac.astra.polman.sidiaryku.utils.MoveView;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
 
         // delay 2 sec
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    MoveView.withFinish(SplashScreen.this, LoginActivity.class);
+                    MoveView.withFinish(SplashScreenActivity.this, LoginActivity.class);
                 },
                 2000);
     }

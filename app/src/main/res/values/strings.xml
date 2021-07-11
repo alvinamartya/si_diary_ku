@@ -9,4 +9,10 @@
     <string name="what_made_you_lough_today">What made you lough today?</string>
     <string name="write">Write</string>
     <string name="write_diary_image">write diary image</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email address</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="repeat_password">Repeat Password</string>
 </resources>

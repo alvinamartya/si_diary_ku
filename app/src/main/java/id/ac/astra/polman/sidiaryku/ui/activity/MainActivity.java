@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku;
+package id.ac.astra.polman.sidiaryku.ui.activity;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku.ui.profile;
+package id.ac.astra.polman.sidiaryku.ui.fragment.profile;
 
 import androidx.lifecycle.ViewModel;
 

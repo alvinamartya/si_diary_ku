@@ -3,12 +3,14 @@ package id.ac.astra.polman.sidiaryku.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 
 public class Preference {
+    private final static String TAG = Preference.class.getSimpleName();
     private final static String key = "data_key";
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
@@ -31,10 +33,13 @@ public class Preference {
         }
 
         editor.putString(user_key, jsonUser);
+        editor.commit();
     }
 
     public UserEntity getUser() {
         String jsonUser = sharedPreferences.getString(user_key, "");
+
+        Log.e(TAG, "getUser: " + jsonUser);
 
         if(!jsonUser.equals("")) {
             return gson.fromJson(jsonUser, UserEntity.class);

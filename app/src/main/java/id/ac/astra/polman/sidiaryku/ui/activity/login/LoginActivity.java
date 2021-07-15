@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoginViewModel loginViewModel = new LoginViewModel();
+        LoginViewModel viewModel = new LoginViewModel();
 
         // binding activity
         ActivityLoginBinding binding = DataBindingUtil
@@ -48,15 +48,13 @@ public class LoginActivity extends AppCompatActivity {
             String password = Objects.requireNonNull(binding.passwordLoginText.getText()).toString();
             LoginModel loginModel = new LoginModel(email, password);
 
-            loginViewModel
+            viewModel
                     .login(this, loginModel)
                     .observe(this, responseModel -> {
                         progressDialog.dismiss();
 
                         if (responseModel.isSuccess()) {
-                            PopupMessage.showWithAction(this, title, "Login is success", (dialog, which) -> {
-                                MoveView.withFinish(this, MainActivity.class);
-                            });
+                            MoveView.withFinish(this, MainActivity.class);
                         } else {
                             PopupMessage.show(this, title, responseModel.getMessage());
                         }

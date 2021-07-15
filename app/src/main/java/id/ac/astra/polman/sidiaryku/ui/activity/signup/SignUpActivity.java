@@ -22,6 +22,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SignUpViewModel viewModel = new SignUpViewModel();
+
         // binding activity
         ActivitySignUpBinding binding = DataBindingUtil
                 .setContentView(this, R.layout.activity_sign_up);
@@ -46,19 +48,16 @@ public class SignUpActivity extends AppCompatActivity {
             String password = Objects.requireNonNull(binding.passwordSignUpText.getText()).toString();
             String repeatPassword = Objects.requireNonNull(binding.repeatPasswordSignUpText.getText()).toString();
             String name = Objects.requireNonNull(binding.nameText.getText()).toString();
-            SignUpModel signUpModel = new SignUpModel(email, password, repeatPassword, name);
+            SignUpModel signUpModel = new SignUpModel(email, name, password, repeatPassword);
 
             // sign up
-            binding
-                    .getViewModel()
+            viewModel
                     .signUp(this, signUpModel)
                     .observe(this, responseModel -> {
                         progressDialog.dismiss();
 
                         if (responseModel.isSuccess()) {
-                            PopupMessage.showWithAction(this, title, "Sign up is success", (dialog, which) -> {
-                                MoveView.withFinish(this, MainActivity.class);
-                            });
+                            MoveView.withFinish(this, MainActivity.class);
                         } else {
                             PopupMessage.show(this, title, responseModel.getMessage());
                         }

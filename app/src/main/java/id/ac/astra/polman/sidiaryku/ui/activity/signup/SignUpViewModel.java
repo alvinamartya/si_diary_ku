@@ -1,6 +1,7 @@
 package id.ac.astra.polman.sidiaryku.ui.activity.signup;
 
 import android.app.Activity;
+import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -15,14 +16,24 @@ import java.util.Map;
 import id.ac.astra.polman.sidiaryku.model.SignUpModel;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
+import id.ac.astra.polman.sidiaryku.utils.FirebaseAnalyticsHelper;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
 import id.ac.astra.polman.sidiaryku.utils.Preference;
 import id.ac.astra.polman.sidiaryku.utils.Validation;
 
 public class SignUpViewModel extends ViewModel {
+    private final static String TAG = SignUpViewModel.class.getSimpleName();
     public LiveData<ResponseModel> signUp(Activity activity, SignUpModel signUpModel) {
         MutableLiveData<ResponseModel> signUpLiveData = new MutableLiveData<>();
 
+        // instance firebase auth
+        FirebaseAuthHelper.getInstance();
+
+        // firebase analytics log user
+        FirebaseAnalyticsHelper analytics = new FirebaseAnalyticsHelper(activity);
+        analytics.logEventUserLogin(signUpModel.getEmail());
+
+        // validate data
         if (signUpModel.getEmail().isEmpty()) {
             signUpLiveData.postValue(new ResponseModel(false, "Email is empty"));
         } else if (signUpModel.getPassword().isEmpty()) {
@@ -36,6 +47,7 @@ public class SignUpViewModel extends ViewModel {
         } else if (!signUpModel.getPassword().equals(signUpModel.getRepeatPassword())) {
             signUpLiveData.postValue(new ResponseModel(false, "Password and Repeat Password are not same"));
         } else {
+            // sign up
             FirebaseAuthHelper.signUp(activity, signUpModel.getEmail(), signUpModel.getPassword()).observe((LifecycleOwner) activity, responseModel -> {
                 if (responseModel.isSuccess()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -56,6 +68,7 @@ public class SignUpViewModel extends ViewModel {
                                         signUpModel.getName()
                                 ));
 
+                                analytics.logUser(signUpModel.getEmail());
                                 signUpLiveData.postValue(new ResponseModel(true, "Success"));
                             })
                             .addOnFailureListener(e -> {

@@ -16,4 +16,10 @@
     <string name="forgot_password">Forgot password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="name">Name</string>
+    <string name="diaries_all_the_time">Diaries all the time</string>
+    <string name="diaries_of_this_month">Diaries of this month</string>
+    <string name="logout">Logout</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="profile_hay">Hay</string>
+    <string name="profile_hope">we hope you always happy</string>
 </resources>

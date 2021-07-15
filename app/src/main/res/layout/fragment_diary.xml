@@ -16,7 +16,7 @@
             android:id="@+id/diary_title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="56dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -41,7 +41,7 @@
             android:id="@+id/desc_diary_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/what_made_you_lough_today"
             app:layout_constraintTop_toBottomOf="@id/diary_title_layout" />

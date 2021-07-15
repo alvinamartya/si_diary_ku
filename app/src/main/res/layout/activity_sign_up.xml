@@ -36,7 +36,7 @@
             <ImageView
                 android:id="@+id/login_image"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/sign_up"
                 app:layout_constraintBottom_toTopOf="@id/form_sign_up_layout"
@@ -65,6 +65,20 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/email_address"
                         android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:boxBackgroundColor="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/name"
+                        android:inputType="text"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

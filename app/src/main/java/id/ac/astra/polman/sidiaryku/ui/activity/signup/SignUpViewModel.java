@@ -1,7 +1,6 @@
 package id.ac.astra.polman.sidiaryku.ui.activity.signup;
 
 import android.app.Activity;
-import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -13,9 +12,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import id.ac.astra.polman.sidiaryku.model.SignUpModel;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
+import id.ac.astra.polman.sidiaryku.model.SignUpModel;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAnalyticsHelper;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
 import id.ac.astra.polman.sidiaryku.utils.Preference;
@@ -55,6 +54,7 @@ public class SignUpViewModel extends ViewModel {
                     Map<String, Object> user = new HashMap<>();
                     user.put("email", signUpModel.getEmail());
                     user.put("name", signUpModel.getName());
+                    user.put("note", "");
 
                     // insert user to FireStore on collection user
                     db
@@ -65,7 +65,8 @@ public class SignUpViewModel extends ViewModel {
                                 new Preference(activity).setUser(new UserEntity(
                                         signUpModel.getEmail(),
                                         signUpModel.getPassword(),
-                                        signUpModel.getName()
+                                        signUpModel.getName(),
+                                        ""
                                 ));
 
                                 analytics.logUser(signUpModel.getEmail());

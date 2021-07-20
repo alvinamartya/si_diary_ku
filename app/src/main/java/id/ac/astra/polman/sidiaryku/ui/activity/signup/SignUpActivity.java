@@ -35,12 +35,12 @@ public class SignUpActivity extends AppCompatActivity {
 
         // sign up
         binding.signUpButton.setOnClickListener(v -> {
-            String title = "SignUp";
+            String title = getString(R.string.sign_up);
 
             // show progress dialog
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle(title);
-            progressDialog.setMessage("Please wait...");
+            progressDialog.setMessage(getString(R.string.please_wait));
             progressDialog.show();
 
             // get data in ui

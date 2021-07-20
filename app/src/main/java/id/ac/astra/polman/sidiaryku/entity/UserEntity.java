@@ -4,14 +4,17 @@ public class UserEntity {
     private String email;
     private String password;
     private String name;
+    private String note;
 
-    public UserEntity(String email, String password, String name) {
+    public UserEntity(String email, String password, String name, String note) {
         this.email = email;
         this.password = password;
         this.name = name;
+        this.note = note;
     }
 
-    public UserEntity() {
+    public  UserEntity() {
+
     }
 
     public String getEmail() {
@@ -36,5 +39,13 @@ public class UserEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

@@ -35,12 +35,12 @@ public class LoginActivity extends AppCompatActivity {
 
         // login
         binding.loginButton.setOnClickListener(v -> {
-            String title = "Login";
+            String title = getString(R.string.login);
 
             // show progress dialog
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle(title);
-            progressDialog.setMessage("Please wait...");
+            progressDialog.setMessage(getString(R.string.please_wait));
             progressDialog.show();
 
             // binding data in ui

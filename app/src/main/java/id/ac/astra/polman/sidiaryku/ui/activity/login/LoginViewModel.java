@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -22,6 +21,7 @@ import id.ac.astra.polman.sidiaryku.utils.Preference;
 
 public class LoginViewModel extends ViewModel {
     private final static String TAG = LoginViewModel.class.getSimpleName();
+
     public LiveData<ResponseModel> login(Activity activity, LoginModel loginModel) {
         MutableLiveData<ResponseModel> loginLiveData = new MutableLiveData<>();
 
@@ -55,7 +55,8 @@ public class LoginViewModel extends ViewModel {
                                             new Preference(activity).setUser(new UserEntity(
                                                     loginModel.getEmail(),
                                                     loginModel.getPassword(),
-                                                    snapshot != null ? snapshot.getString("name") : ""
+                                                    snapshot != null ? snapshot.getString("name") : "",
+                                                    snapshot != null ? snapshot.getString("note") : ""
                                             ));
 
                                             loginLiveData.postValue(new ResponseModel(true, "Login is success"));

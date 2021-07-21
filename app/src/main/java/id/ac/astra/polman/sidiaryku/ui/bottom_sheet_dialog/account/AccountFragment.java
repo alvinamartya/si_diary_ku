@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku.ui.dialog.account;
+package id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.account;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

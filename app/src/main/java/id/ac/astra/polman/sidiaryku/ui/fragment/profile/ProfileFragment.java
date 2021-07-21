@@ -17,7 +17,8 @@ import org.jetbrains.annotations.NotNull;
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.FragmentProfileBinding;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
-import id.ac.astra.polman.sidiaryku.ui.dialog.account.AccountFragment;
+import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.account.AccountFragment;
+import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.change_password.ChangePasswordFragment;
 import id.ac.astra.polman.sidiaryku.utils.MoveView;
 import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
 
@@ -52,6 +53,13 @@ public class ProfileFragment extends Fragment {
             FragmentManager fragmentManager = this.getChildFragmentManager();
             AccountFragment accountFragment = new AccountFragment(viewModel);
             accountFragment.show(fragmentManager, TAG);
+        });
+
+        // change layout is clicked
+        binding.changePasswordProfileLayout.setOnClickListener(v -> {
+            FragmentManager fragmentManager = this.getChildFragmentManager();
+            ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+            changePasswordFragment.show(fragmentManager, TAG);
         });
 
         // logout layout is clicked

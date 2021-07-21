@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
 import id.ac.astra.polman.sidiaryku.model.SignUpModel;
@@ -36,17 +37,19 @@ public class SignUpViewModel extends ViewModel {
 
         // validate data
         if (signUpModel.getEmail().isEmpty()) {
-            signUpLiveData.postValue(new ResponseModel(false, "Email is empty"));
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.email_is_empty)));
         } else if (signUpModel.getPassword().isEmpty()) {
-            signUpLiveData.postValue(new ResponseModel(false, "Password is empty"));
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.password_is_empty)));
         } else if (signUpModel.getRepeatPassword().isEmpty()) {
-            signUpLiveData.postValue(new ResponseModel(false, "Repeat password is empty"));
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.repeat_password_is_empty)));
         } else if (signUpModel.getName().isEmpty()) {
-            signUpLiveData.postValue(new ResponseModel(false, "Name is empty"));
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.name_is_empty)));
         } else if (!Validation.matchEmail(signUpModel.getEmail())) {
-            signUpLiveData.postValue(new ResponseModel(false, "Invalid email"));
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.invalid_email)));
         } else if (!signUpModel.getPassword().equals(signUpModel.getRepeatPassword())) {
-            signUpLiveData.postValue(new ResponseModel(false, "Password and Repeat Password are not same"));
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.password_and_repeat_password_is_not_same)));
+        } else if (signUpModel.getPassword().length() < 6) {
+            signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.password_at_least_has_six_character)));
         } else {
             // sign up
             FirebaseAuthHelper
@@ -74,7 +77,7 @@ public class SignUpViewModel extends ViewModel {
                                         ));
 
                                         analytics.logUser(signUpModel.getEmail());
-                                        signUpLiveData.postValue(new ResponseModel(true, "Success"));
+                                        signUpLiveData.postValue(new ResponseModel(true, activity.getString(R.string.sign_up_account_is_success)));
                                     })
                                     .addOnFailureListener(e -> {
                                         signUpLiveData.postValue(new ResponseModel(false, e.getLocalizedMessage()));

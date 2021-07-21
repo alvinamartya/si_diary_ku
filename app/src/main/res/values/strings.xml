@@ -36,4 +36,21 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="message_success_account">Change name or password are success</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="email_is_empty">Email is empty</string>
+    <string name="password_is_empty">Password is empty</string>
+    <string name="repeat_password_is_empty">Repeat password is empty</string>
+    <string name="name_is_empty">Name is empty</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="password_and_repeat_password_is_not_same">Password and Repeat Password is not same</string>
+    <string name="password_at_least_has_six_character">Password at least has 6 length of character</string>
+    <string name="sign_up_account_is_success">Sign up account is success</string>
+    <string name="sign_in_is_success">Sign in is success</string>
+    <string name="old_password_is_empty">Old password is empty</string>
+    <string name="new_password_is_empty">New password is empty</string>
+    <string name="invalid_old_password">Invalid old password</string>
+    <string name="new_password_and_repeat_password_is_not_same">New password and Repeat Password is not same</string>
+    <string name="new_password_at_least_has_six_character">New password at least has 6 length of character</string>
+    <string name="change_password_is_success">Change password is success</string>
 </resources>

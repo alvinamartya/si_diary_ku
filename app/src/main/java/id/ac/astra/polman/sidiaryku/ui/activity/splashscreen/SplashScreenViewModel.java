@@ -1,21 +1,16 @@
 package id.ac.astra.polman.sidiaryku.ui.activity.splashscreen;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
-
-import com.google.gson.Gson;
 
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.LoginModel;
 import id.ac.astra.polman.sidiaryku.ui.activity.MainActivity;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginViewModel;
-import id.ac.astra.polman.sidiaryku.utils.FirebaseAnalyticsHelper;
 import id.ac.astra.polman.sidiaryku.utils.MoveView;
 import id.ac.astra.polman.sidiaryku.utils.Preference;
 

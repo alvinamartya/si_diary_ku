@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
+import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.LoginModel;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
@@ -35,9 +36,9 @@ public class LoginViewModel extends ViewModel {
 
         // validate data
         if (loginModel.getEmail().isEmpty()) {
-            loginLiveData.postValue(new ResponseModel(false, "Email is empty"));
+            loginLiveData.postValue(new ResponseModel(false, activity.getString(R.string.email_is_empty)));
         } else if (loginModel.getPassword().isEmpty()) {
-            loginLiveData.postValue(new ResponseModel(false, "Password is empty"));
+            loginLiveData.postValue(new ResponseModel(false, activity.getString(R.string.password_is_empty)));
         } else {
             // sign in
             FirebaseAuthHelper
@@ -60,7 +61,7 @@ public class LoginViewModel extends ViewModel {
                                                     snapshot != null ? snapshot.getString("note") : ""
                                             ));
 
-                                            loginLiveData.postValue(new ResponseModel(true, "Login is success"));
+                                            loginLiveData.postValue(new ResponseModel(true, activity.getString(R.string.sign_in_is_success)));
                                         } else {
                                             String errMessage = Objects.requireNonNull(task.getException()).getLocalizedMessage();
                                             loginLiveData.postValue(new ResponseModel(false, errMessage));

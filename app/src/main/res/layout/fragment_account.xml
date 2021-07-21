@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    tools:context=".ui.dialog.account.AccountFragment">
+    tools:context=".ui.bottom_sheet_dialog.account.AccountFragment">
 
     <TextView
         android:id="@+id/change_name_account_text"

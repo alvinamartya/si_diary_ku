@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku.ui.dialog.account;
+package id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.account;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,14 +21,15 @@ import id.ac.astra.polman.sidiaryku.utils.Preference;
 
 public class AccountViewModel extends ViewModel {
     private final String TAG = AccountViewModel.class.getSimpleName();
+
     public LiveData<ResponseModel> changeNameAndNote(Context context, AccountModel accountModel) {
         MutableLiveData<ResponseModel> accountLiveData = new MutableLiveData<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Preference preference = new Preference(context);
         UserEntity userEntity = preference.getUser();
 
-        if(accountModel.getName().isEmpty()) {
-            accountLiveData.postValue(new ResponseModel(false, "Name is empty"));
+        if (accountModel.getName().isEmpty()) {
+            accountLiveData.postValue(new ResponseModel(false, context.getString(R.string.name_is_empty)));
         } else {
             Map<String, Object> account = new HashMap<>();
             account.put("name", accountModel.getName());
@@ -40,7 +41,7 @@ public class AccountViewModel extends ViewModel {
                     .document(userEntity.getEmail())
                     .set(account)
                     .addOnCompleteListener(task -> {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             String successMessage = context.getString(R.string.message_success_account);
                             accountLiveData.postValue(new ResponseModel(true, successMessage));
                         } else {
@@ -51,7 +52,7 @@ public class AccountViewModel extends ViewModel {
                     })
                     .addOnFailureListener(task -> {
                         accountLiveData.postValue(new ResponseModel(false, task.getLocalizedMessage()));
-                        Log.e(TAG, "changeNameAndNote: " + task.getLocalizedMessage() );
+                        Log.e(TAG, "changeNameAndNote: " + task.getLocalizedMessage());
                     });
         }
 

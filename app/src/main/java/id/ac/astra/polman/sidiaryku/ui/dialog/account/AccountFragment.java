@@ -38,7 +38,7 @@ public class AccountFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.account_fragment, container, false);
+        View v = inflater.inflate(R.layout.fragment_account, container, false);
 
         editTextName = v.findViewById(R.id.name_account_edit_text);
         editTextNote = v.findViewById(R.id.note_account_edit_text);

@@ -11,4 +11,5 @@
 
     <color name="primary_color">#3C5186</color>
     <color name="second_color">#78DEC7</color>
+    <color name="profile_icon_color">#555</color>
 </resources>

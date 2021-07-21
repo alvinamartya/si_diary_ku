@@ -56,7 +56,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxBackgroundColor="@color/white">
+                    app:boxBackgroundColor="@color/white"
+                    app:startIconDrawable="@drawable/ic_baseline_mail_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email_login_text"
@@ -71,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     app:boxBackgroundColor="@color/white"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_login_text"

@@ -1,6 +1,7 @@
 package id.ac.astra.polman.sidiaryku.ui.activity.login;
 
 import android.app.Activity;
+import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -63,7 +64,12 @@ public class LoginViewModel extends ViewModel {
                                         } else {
                                             String errMessage = Objects.requireNonNull(task.getException()).getLocalizedMessage();
                                             loginLiveData.postValue(new ResponseModel(false, errMessage));
+                                            Log.e(TAG, "login: " + errMessage);
                                         }
+                                    })
+                                    .addOnFailureListener(task -> {
+                                        loginLiveData.postValue(new ResponseModel(false, task.getLocalizedMessage()));
+                                        Log.e(TAG, "login: " + task.getLocalizedMessage());
                                     });
                         } else {
                             loginLiveData.postValue(new ResponseModel(false, responseModel.getMessage()));

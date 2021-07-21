@@ -12,7 +12,7 @@ import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
 import id.ac.astra.polman.sidiaryku.utils.Preference;
 
 public class ProfileViewModel extends ViewModel {
-    private final MutableLiveData<UserEntity> userViewModel = new MutableLiveData<>();
+    private static final MutableLiveData<UserEntity> userViewModel = new MutableLiveData<>();
 
     public LiveData<UserEntity> getUser() {
         return userViewModel;
@@ -20,6 +20,7 @@ public class ProfileViewModel extends ViewModel {
 
     public void loadUser(Context context) {
         Preference preference = new Preference(context);
+        System.out.println(preference.getUser());
         userViewModel.setValue(preference.getUser());
     }
 

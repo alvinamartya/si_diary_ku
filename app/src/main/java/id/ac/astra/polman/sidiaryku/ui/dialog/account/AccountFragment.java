@@ -1,28 +1,31 @@
 package id.ac.astra.polman.sidiaryku.ui.dialog.account;
 
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
+import id.ac.astra.polman.sidiaryku.model.AccountModel;
 import id.ac.astra.polman.sidiaryku.ui.fragment.profile.ProfileViewModel;
+import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
 import id.ac.astra.polman.sidiaryku.utils.Preference;
 
-public class AccountFragment extends DialogFragment {
+public class AccountFragment extends BottomSheetDialogFragment {
 
     private TextInputEditText editTextName, editTextNote;
     private Button saveBtn, cancelBtn;
@@ -53,16 +56,52 @@ public class AccountFragment extends DialogFragment {
         Preference preference = new Preference(this.requireContext());
         UserEntity userEntity = preference.getUser();
 
+        // binding old data to all fields
         editTextName.setText(userEntity.getName());
         editTextNote.setText(userEntity.getNote());
 
+        // cancel any changes
         cancelBtn.setOnClickListener(v -> {
-            profileViewModel.loadUser(this.getContext());
-            dismiss();
+            closeDialog();
         });
 
+        // save changes to fire store
         saveBtn.setOnClickListener(v -> {
+            String title = getString(R.string.change_name_and_note);
 
+            // show progress dialog
+            ProgressDialog progressDialog = new ProgressDialog(this.getContext());
+            progressDialog.setTitle(title);
+            progressDialog.setMessage(getString(R.string.please_wait));
+            progressDialog.show();
+
+            // change name and note
+            String name = Objects.requireNonNull(editTextName.getText()).toString();
+            String note = Objects.requireNonNull(editTextNote.getText()).toString();
+            AccountModel accountModel = new AccountModel(name, note);
+            viewModel
+                    .changeNameAndNote(this.getContext(), accountModel)
+                    .observe(this, responseModel -> {
+                        progressDialog.dismiss();
+
+                        if (responseModel.isSuccess()) {
+                            // change data in preference
+                            userEntity.setNote(note);
+                            userEntity.setName(name);
+                            preference.setUser(userEntity);
+
+                            // dismiss
+                            closeDialog();
+                        } else {
+                            PopupMessage.show(this.getContext(), title, responseModel.getMessage());
+                        }
+                    });
         });
+    }
+
+    // load any changes and dismiss dialog
+    private void closeDialog() {
+        profileViewModel.loadUser(this.getContext());
+        dismiss();
     }
 }

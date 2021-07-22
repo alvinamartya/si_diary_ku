@@ -1,16 +1,12 @@
 package id.ac.astra.polman.sidiaryku.ui.activity.splashscreen;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.ActivitySplashScreenBinding;
-import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
-import id.ac.astra.polman.sidiaryku.utils.MoveView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -20,8 +16,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         // binding
         ActivitySplashScreenBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash_screen);
-
-        SplashScreenViewModel splashScreenViewModel = new SplashScreenViewModel();
-        splashScreenViewModel.checkLogin(this);
+        binding.setViewModel(new SplashScreenViewModel());
+        binding.getViewModel().checkLogin(this);
     }
 }

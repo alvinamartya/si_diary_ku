@@ -39,8 +39,6 @@ public class Preference {
     public UserEntity getUser() {
         String jsonUser = sharedPreferences.getString(user_key, "");
 
-        Log.e(TAG, "getUser: " + jsonUser);
-
         if(!jsonUser.equals("")) {
             return gson.fromJson(jsonUser, UserEntity.class);
         }

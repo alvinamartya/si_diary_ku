@@ -18,5 +18,14 @@
         android:id="@+id/navigation_diary"
         android:name="id.ac.astra.polman.sidiaryku.ui.fragment.diary.DiaryFragment"
         android:label="diary_fragment"
-        tools:layout="@layout/fragment_diary" />
+        tools:layout="@layout/fragment_diary" >
+        <action
+            android:id="@+id/action_navigation_diary_to_newDiaryFragment"
+            app:destination="@id/newDiaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newDiaryFragment"
+        android:name="id.ac.astra.polman.sidiaryku.ui.fragment.new_diary.NewDiaryFragment"
+        android:label="fragment_new_diary"
+        tools:layout="@layout/fragment_new_diary" />
 </navigation>

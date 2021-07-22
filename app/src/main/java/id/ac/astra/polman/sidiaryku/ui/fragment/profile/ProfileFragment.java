@@ -17,15 +17,14 @@ import org.jetbrains.annotations.NotNull;
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.FragmentProfileBinding;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
-import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.account.AccountFragment;
-import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.change_password.ChangePasswordFragment;
+import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.account.AccountBottomSheetDialog;
+import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.change_password.ChangePasswordBottomSheetDialog;
 import id.ac.astra.polman.sidiaryku.utils.MoveView;
 import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
 
 public class ProfileFragment extends Fragment {
 
     private final static String TAG = ProfileFragment.class.getSimpleName();
-    private ProfileViewModel viewModel;
     private FragmentProfileBinding binding;
 
     @Override
@@ -39,10 +38,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        binding.setViewModel(new ViewModelProvider(this).get(ProfileViewModel.class));
 
-        viewModel.loadUser(this.getContext());
-        viewModel.getUser().observe(this.getViewLifecycleOwner(), userEntity -> {
+        binding.getViewModel().loadUser(this.getContext());
+        binding.getViewModel().getUser().observe(this.getViewLifecycleOwner(), userEntity -> {
             String note = userEntity.getNote().equals("") ? getString(R.string.we_hope_you_always_happy) : userEntity.getNote();
             binding.nameProfileText.setText(userEntity.getName());
             binding.noteProfileText.setText(note);
@@ -51,15 +50,15 @@ public class ProfileFragment extends Fragment {
         // account layout is clicked
         binding.accountProfileLayout.setOnClickListener(v -> {
             FragmentManager fragmentManager = this.getChildFragmentManager();
-            AccountFragment accountFragment = new AccountFragment(viewModel);
-            accountFragment.show(fragmentManager, TAG);
+            AccountBottomSheetDialog accountBottomSheetDialog = new AccountBottomSheetDialog(binding.getViewModel());
+            accountBottomSheetDialog.show(fragmentManager, TAG);
         });
 
         // change layout is clicked
         binding.changePasswordProfileLayout.setOnClickListener(v -> {
             FragmentManager fragmentManager = this.getChildFragmentManager();
-            ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
-            changePasswordFragment.show(fragmentManager, TAG);
+            ChangePasswordBottomSheetDialog changePasswordBottomSheetDialog = new ChangePasswordBottomSheetDialog();
+            changePasswordBottomSheetDialog.show(fragmentManager, TAG);
         });
 
         // logout layout is clicked
@@ -68,7 +67,7 @@ public class ProfileFragment extends Fragment {
                 getString(R.string.logout),
                 getString(R.string.are_you_sure),
                 (successDialog, which) -> {
-                    viewModel.logout(getActivity());
+                    binding.getViewModel().logout(getActivity());
                     MoveView.withFinish(getContext(), LoginActivity.class);
                 },
                 (failedDialog, which) -> {

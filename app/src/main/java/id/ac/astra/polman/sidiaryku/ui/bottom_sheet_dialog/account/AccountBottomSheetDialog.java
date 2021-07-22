@@ -5,68 +5,59 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 import id.ac.astra.polman.sidiaryku.R;
+import id.ac.astra.polman.sidiaryku.databinding.BottomSheetDialogAccountBinding;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.AccountModel;
 import id.ac.astra.polman.sidiaryku.ui.fragment.profile.ProfileViewModel;
 import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
 import id.ac.astra.polman.sidiaryku.utils.Preference;
 
-public class AccountFragment extends BottomSheetDialogFragment {
+public class AccountBottomSheetDialog extends BottomSheetDialogFragment {
 
-    private TextInputEditText editTextName, editTextNote;
-    private Button saveBtn, cancelBtn;
     private final ProfileViewModel profileViewModel;
+    private BottomSheetDialogAccountBinding binding;
 
-    public AccountFragment(ProfileViewModel profileViewModel) {
+    public AccountBottomSheetDialog(ProfileViewModel profileViewModel) {
         this.profileViewModel = profileViewModel;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_account, container, false);
-
-        editTextName = v.findViewById(R.id.name_account_edit_text);
-        editTextNote = v.findViewById(R.id.note_account_edit_text);
-        saveBtn = v.findViewById(R.id.save_account_button);
-        cancelBtn = v.findViewById(R.id.cancel_account_button);
-
-        return v;
+        binding = BottomSheetDialogAccountBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AccountViewModel viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-
         Preference preference = new Preference(this.requireContext());
         UserEntity userEntity = preference.getUser();
+        binding.setViewModel(new ViewModelProvider(this).get(AccountViewModel.class));
 
         // binding old data to all fields
-        editTextName.setText(userEntity.getName());
-        editTextNote.setText(userEntity.getNote());
+        binding.nameAccountEditText.setText(userEntity.getName());
+        binding.noteAccountEditText.setText(userEntity.getNote());
 
         // cancel any changes
-        cancelBtn.setOnClickListener(v -> {
+        binding.cancelAccountButton.setOnClickListener(v -> {
             closeDialog();
         });
 
         // save changes to fire store
-        saveBtn.setOnClickListener(v -> {
+        binding.saveAccountButton.setOnClickListener(v -> {
             String title = getString(R.string.change_name_and_note);
 
             // show progress dialog
@@ -76,10 +67,11 @@ public class AccountFragment extends BottomSheetDialogFragment {
             progressDialog.show();
 
             // change name and note
-            String name = Objects.requireNonNull(editTextName.getText()).toString();
-            String note = Objects.requireNonNull(editTextNote.getText()).toString();
+            String name = Objects.requireNonNull(binding.nameAccountEditText.getText()).toString();
+            String note = Objects.requireNonNull(binding.noteAccountEditText.getText()).toString();
             AccountModel accountModel = new AccountModel(name, note);
-            viewModel
+            binding
+                    .getViewModel()
                     .changeNameAndNote(this.getContext(), accountModel)
                     .observe(this, responseModel -> {
                         progressDialog.dismiss();

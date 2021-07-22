@@ -22,11 +22,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoginViewModel viewModel = new LoginViewModel();
-
         // binding activity
         ActivityLoginBinding binding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
+
+        binding.setViewModel(new LoginViewModel());
 
         // move to sign up view
         binding.signUpLoginButton.setOnClickListener(v -> {
@@ -48,7 +48,8 @@ public class LoginActivity extends AppCompatActivity {
             String password = Objects.requireNonNull(binding.passwordLoginText.getText()).toString();
             LoginModel loginModel = new LoginModel(email, password);
 
-            viewModel
+            binding
+                    .getViewModel()
                     .login(this, loginModel)
                     .observe(this, responseModel -> {
                         progressDialog.dismiss();

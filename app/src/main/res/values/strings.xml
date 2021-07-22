@@ -16,8 +16,6 @@
     <string name="forgot_password">Forgot password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="name">Name</string>
-    <string name="diaries_all_the_time">Diaries all the time</string>
-    <string name="diaries_of_this_month">Diaries of this month</string>
     <string name="logout">Sign Out</string>
     <string name="profile_image">Profile Image</string>
     <string name="log_out_of_current_account">Log out of current account</string>
@@ -53,4 +51,15 @@
     <string name="new_password_and_repeat_password_is_not_same">New password and Repeat Password is not same</string>
     <string name="new_password_at_least_has_six_character">New password at least has 6 length of character</string>
     <string name="change_password_is_success">Change password is success</string>
+    <string name="clear_your_mind">Clear your mind</string>
+    <string name="back_image">back image</string>
+    <string name="what_happened_today">What happened today?</string>
+    <string name="type_to_write">Type to write</string>
+    <string name="characters_left">characters left</string>
+    <string name="upload_a_picture">Upload a picture</string>
+    <string name="pick_a_location">Pick a location</string>
+    <string name="add_tags">Add tags</string>
+    <string name="picture_new_diary_image">picture new diary image</string>
+    <string name="add_new_tag">Add new tag</string>
+    <string name="new_tag">New tag</string>
 </resources>

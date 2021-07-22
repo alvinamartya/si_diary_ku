@@ -1,38 +1,34 @@
 package id.ac.astra.polman.sidiaryku.ui.fragment.diary;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import org.jetbrains.annotations.NotNull;
+
 import id.ac.astra.polman.sidiaryku.R;
+import id.ac.astra.polman.sidiaryku.databinding.FragmentDiaryBinding;
 
 public class DiaryFragment extends Fragment {
-
-    private DiaryViewModel mViewModel;
-
-    public static DiaryFragment newInstance() {
-        return new DiaryFragment();
-    }
+    private FragmentDiaryBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_diary, container, false);
+        binding = FragmentDiaryBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
-        // TODO: Use the ViewModel
-    }
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        binding.writeButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_navigation_diary_to_newDiaryFragment));
+    }
 }

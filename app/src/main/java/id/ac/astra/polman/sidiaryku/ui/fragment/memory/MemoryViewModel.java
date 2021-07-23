@@ -1,4 +1,4 @@
-package id.ac.astra.polman.sidiaryku.ui.memory;
+package id.ac.astra.polman.sidiaryku.ui.fragment.memory;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,37 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primary_color"
-    tools:context=".SplashScreen">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseCompoundDrawables">
+    <data>
+        <variable
+            name="viewModel"
+            type="id.ac.astra.polman.sidiaryku.ui.activity.splashscreen.SplashScreenViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="26dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        tools:context=".ui.activity.splashscreen.SplashScreenActivity">
 
         <ImageView
+            android:id="@+id/splash_screen_image"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:contentDescription="@string/splash_screen"
-            android:src="@drawable/splash_screen" />
+            android:src="@drawable/splash_screen"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/splash_screen_title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="serif"
+            android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textSize="26sp" />
-    </LinearLayout>
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/splash_screen_image" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.agrawalsuneet.dotsloader.loaders.LinearDotsLoader
+            android:id="@+id/dot_loader_splash_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:loader_animDur="1000"
+            app:loader_circleRadius="6dp"
+            app:loader_defaultColor="@color/gray"
+            app:loader_dotsDist="3dp"
+            app:loader_expandOnSelect="false"
+            app:loader_firstShadowColor="@color/gray"
+            app:loader_isSingleDir="false"
+            app:loader_noOfDots="8"
+            app:loader_secondShadowColor="@color/gray"
+            app:loader_selectedColor="@color/primary_color"
+            app:loader_selectedRadius="10dp"
+            app:loader_showRunningShadow="true" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

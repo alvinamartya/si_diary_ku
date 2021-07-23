@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "681138692123",
+    "project_id": "sidiaryku",
+    "storage_bucket": "sidiaryku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681138692123:android:749646a3ff7a64fc96d8be",
+        "android_client_info": {
+          "package_name": "id.ac.astra.polman.sidiaryku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681138692123-vapq06s65phf77mdbu1n3ievkalspees.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.ac.astra.polman.sidiaryku",
+            "certificate_hash": "e817c54ec1d65cf5edb3b26310fec9e96831a7f3"
+          }
+        },
+        {
+          "client_id": "681138692123-4g0c7ihidv773pnmj5e78t7fn107qc9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_e_L_V37LsXeknO1NZxkihAeh8OASdg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681138692123-4g0c7ihidv773pnmj5e78t7fn107qc9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

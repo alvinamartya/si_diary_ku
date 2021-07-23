@@ -24,6 +24,29 @@ public class PopupMessage {
                 .show();
     }
 
+    public static void showWithAction(Context context, String title, String message,
+                                              DialogInterface.OnClickListener positiveListener) {
+        new AlertDialog
+                .Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Ok", positiveListener)
+                .setNegativeButton(null, null)
+                .show();
+    }
+
+    public static void showWithAction(Context context, String title, String message, int iconId,
+                                              DialogInterface.OnClickListener positiveListener) {
+        new AlertDialog
+                .Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Ok", positiveListener)
+                .setIcon(iconId)
+                .setNegativeButton(null, null)
+                .show();
+    }
+
     // show confirm message
     public static void confirm(Context context, String title, String message,
                                DialogInterface.OnClickListener positiveListener,
@@ -32,8 +55,8 @@ public class PopupMessage {
                 .Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ya", positiveListener)
-                .setNegativeButton("Tidak", negativeListener)
+                .setPositiveButton("Yes", positiveListener)
+                .setNegativeButton("No", negativeListener)
                 .show();
     }
 
@@ -46,8 +69,8 @@ public class PopupMessage {
                 .setTitle(title)
                 .setMessage(message)
                 .setIcon(iconId)
-                .setPositiveButton("Ya", positiveListener)
-                .setNegativeButton("Tidak", negativeListener)
+                .setPositiveButton("Yes", positiveListener)
+                .setNegativeButton("No", negativeListener)
                 .show();
     }
 }

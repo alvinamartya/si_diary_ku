@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="id.ac.astra.polman.sidiaryku">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SIDiaryKu">
-        <activity android:name=".LoginActivity"></activity>
+        android:theme="@style/Theme.SIDiaryKu"
+        tools:ignore="AllowBackup">
         <activity
-            android:name=".SplashScreen"
+            android:name=".ui.activity.signup.SignUpActivity"
+            android:theme="@style/Theme.SIDiaryKu.NoActionBar" />
+        <activity
+            android:name=".ui.activity.login.LoginActivity"
+            android:theme="@style/Theme.SIDiaryKu.NoActionBar" />
+        <activity
+            android:name=".ui.activity.splashscreen.SplashScreenActivity"
             android:theme="@style/Theme.SIDiaryKu.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.SIDiaryKu.NoActionBar" />
     </application>

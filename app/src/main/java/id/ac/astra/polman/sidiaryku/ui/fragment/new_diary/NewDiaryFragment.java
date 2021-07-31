@@ -1,6 +1,9 @@
 package id.ac.astra.polman.sidiaryku.ui.fragment.new_diary;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,6 +28,8 @@ import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.new_tag.NewTagBottomS
 
 public class NewDiaryFragment extends Fragment {
     private final static String TAG = NewDiaryFragment.class.getSimpleName();
+    private final static int KEY_CAMERA = 111;
+    private final static int KEY_GALLERY = 222;
     private FragmentNewDiaryBinding binding;
 
     @Override
@@ -68,5 +74,44 @@ public class NewDiaryFragment extends Fragment {
             newTagBottomSheetDialog.show(fragmentManager, TAG);
         });
 
+
+        binding.uploadPictureNewDiaryButton.setOnClickListener(v -> {
+            String titleDialog = "";
+            CharSequence[] items = {
+                    "Take Photo",
+                    "Choose from library",
+                    "Cancel"
+            };
+
+            new AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle(titleDialog)
+                    .setItems(items, (dialog, i) -> {
+                        if(i == 0) {
+                            takePhotoFromCamera();
+                        } else if(i == 1) {
+                            takePhotoFromGallery();
+                        } else {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        });
+    }
+
+    // get image using camera
+    private void takePhotoFromCamera() {
+        Intent intentTakePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    }
+
+    /// get image from gallery
+    private void takePhotoFromGallery() {
+        Intent intentFromGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intentFromGallery, KEY_GALLERY);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

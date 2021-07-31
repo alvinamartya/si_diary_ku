@@ -41,7 +41,8 @@
                 app:layout_constraintBottom_toTopOf="@id/form_login_layout"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/login_title_text" />
+                app:layout_constraintTop_toBottomOf="@id/login_title_text"
+                android:contentDescription="@string/login_image" />
 
             <LinearLayout
                 android:id="@+id/form_login_layout"

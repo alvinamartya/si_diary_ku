@@ -1,9 +1,13 @@
 package id.ac.astra.polman.sidiaryku.ui.activity;
 
+import android.Manifest;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -13,9 +17,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.ActivityMainBinding;
+import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static String TAG = MainActivity.class.getSimpleName();
     private ActivityMainBinding binding;
 
     @Override
@@ -38,5 +44,20 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // permission
+        ActivityResultLauncher<String[]> requestMultiplePermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+            result.forEach((key, value) -> {
+                String statusPermission = value ? "granted" : "denied";
+                Log.i(TAG, "permission " + key + " is " + statusPermission);
+            });
+        });
+
+        requestMultiplePermissionLauncher.launch(
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                }
+        );
     }
 }

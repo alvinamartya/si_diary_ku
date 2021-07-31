@@ -62,4 +62,5 @@
     <string name="picture_new_diary_image">picture new diary image</string>
     <string name="add_new_tag">Add new tag</string>
     <string name="new_tag">New tag</string>
+    <string name="login_image">Sign in image</string>
 </resources>

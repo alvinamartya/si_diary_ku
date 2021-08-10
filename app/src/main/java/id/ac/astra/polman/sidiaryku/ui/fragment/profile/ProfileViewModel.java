@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class ProfileViewModel extends ViewModel {
     private static final MutableLiveData<UserEntity> userViewModel = new MutableLiveData<>();
@@ -19,9 +19,9 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public void loadUser(Context context) {
-        Preference preference = new Preference(context);
-        System.out.println(preference.getUser());
-        userViewModel.setValue(preference.getUser());
+        PreferenceHelper preferenceHelper = new PreferenceHelper(context);
+        System.out.println(preferenceHelper.getUser());
+        userViewModel.setValue(preferenceHelper.getUser());
     }
 
     public void logout(Activity activity) {
@@ -29,7 +29,7 @@ public class ProfileViewModel extends ViewModel {
         FirebaseAuthHelper.getInstance();
 
         // sign out
-        new Preference(activity).setUser(null);
+        new PreferenceHelper(activity).setUser(null);
         FirebaseAuthHelper.signOut();
     }
 }

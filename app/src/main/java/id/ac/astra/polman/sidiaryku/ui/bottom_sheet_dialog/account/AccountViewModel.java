@@ -17,7 +17,7 @@ import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.AccountModel;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class AccountViewModel extends ViewModel {
     private final String TAG = AccountViewModel.class.getSimpleName();
@@ -25,8 +25,8 @@ public class AccountViewModel extends ViewModel {
     public LiveData<ResponseModel> changeNameAndNote(Context context, AccountModel accountModel) {
         MutableLiveData<ResponseModel> accountLiveData = new MutableLiveData<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Preference preference = new Preference(context);
-        UserEntity userEntity = preference.getUser();
+        PreferenceHelper preferenceHelper = new PreferenceHelper(context);
+        UserEntity userEntity = preferenceHelper.getUser();
 
         if (accountModel.getName().isEmpty()) {
             accountLiveData.postValue(new ResponseModel(false, context.getString(R.string.name_is_empty)));

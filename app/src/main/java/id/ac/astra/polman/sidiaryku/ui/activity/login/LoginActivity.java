@@ -11,10 +11,10 @@ import java.util.Objects;
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.ActivityLoginBinding;
 import id.ac.astra.polman.sidiaryku.model.LoginModel;
-import id.ac.astra.polman.sidiaryku.ui.activity.MainActivity;
+import id.ac.astra.polman.sidiaryku.ui.activity.main.MainActivity;
 import id.ac.astra.polman.sidiaryku.ui.activity.signup.SignUpActivity;
-import id.ac.astra.polman.sidiaryku.utils.MoveView;
-import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
+import id.ac.astra.polman.sidiaryku.utils.MoveViewHelper;
+import id.ac.astra.polman.sidiaryku.utils.PopupMessageHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // move to sign up view
         binding.signUpLoginButton.setOnClickListener(v -> {
-            MoveView.withoutFinish(this, SignUpActivity.class);
+            MoveViewHelper.withoutFinish(this, SignUpActivity.class);
         });
 
         // login
@@ -55,9 +55,9 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         if (responseModel.isSuccess()) {
-                            MoveView.withFinish(this, MainActivity.class);
+                            MoveViewHelper.withFinish(this, MainActivity.class);
                         } else {
-                            PopupMessage.show(this, title, responseModel.getMessage());
+                            PopupMessageHelper.show(this, title, responseModel.getMessage());
                         }
                     });
         });

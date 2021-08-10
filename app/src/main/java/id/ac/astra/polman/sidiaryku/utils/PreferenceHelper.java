@@ -3,14 +3,13 @@ package id.ac.astra.polman.sidiaryku.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 
-public class Preference {
-    private final static String TAG = Preference.class.getSimpleName();
+public class PreferenceHelper {
+    private final static String TAG = PreferenceHelper.class.getSimpleName();
     private final static String key = "data_key";
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
@@ -20,7 +19,7 @@ public class Preference {
     private final static String user_key = "user_key";
 
     @SuppressLint("CommitPrefEdits")
-    public Preference(Context context) {
+    public PreferenceHelper(Context context) {
         sharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         gson = new Gson();

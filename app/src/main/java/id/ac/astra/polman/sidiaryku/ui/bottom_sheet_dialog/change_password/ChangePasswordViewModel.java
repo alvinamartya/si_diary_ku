@@ -18,7 +18,7 @@ import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.ChangePasswordModel;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class ChangePasswordViewModel extends ViewModel {
     private final String TAG = ChangePasswordViewModel.class.getSimpleName();
@@ -26,8 +26,8 @@ public class ChangePasswordViewModel extends ViewModel {
     public LiveData<ResponseModel> changePassword(Context context, ChangePasswordModel changePasswordModel) {
         MutableLiveData<ResponseModel> changePasswordLiveData = new MutableLiveData<>();
 
-        Preference preference = new Preference(context);
-        UserEntity userEntity = preference.getUser();
+        PreferenceHelper preferenceHelper = new PreferenceHelper(context);
+        UserEntity userEntity = preferenceHelper.getUser();
 
         if (changePasswordModel.getOldPassword().isEmpty()) {
             changePasswordLiveData.postValue(new ResponseModel(false, context.getString(R.string.old_password_is_empty)));

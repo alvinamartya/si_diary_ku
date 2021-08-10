@@ -4,15 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import org.jetbrains.annotations.NotNull;
-
 import id.ac.astra.polman.sidiaryku.R;
+import id.ac.astra.polman.sidiaryku.dao.PlaceDao;
+import id.ac.astra.polman.sidiaryku.dao.TagDao;
 import id.ac.astra.polman.sidiaryku.databinding.FragmentDiaryBinding;
 
 public class DiaryFragment extends Fragment {
@@ -28,7 +27,15 @@ public class DiaryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // reset place dao
+        PlaceDao.initialize();
+        PlaceDao.setPlaceLiveData(null);
 
+        // reset tag dao
+        TagDao.initialize();
+        TagDao.clearTagLiveData();
+
+        // write button is clicked
         binding.writeButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_navigation_diary_to_newDiaryFragment));
     }
 }

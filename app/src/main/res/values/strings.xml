@@ -6,6 +6,7 @@
     <string name="profile">Profile</string>
     <string name="create_just_your">Create just your</string>
     <string name="memories">memories</string>
+    <string name="memories_title">Memories</string>
     <string name="what_made_you_lough_today">What made you lough today?</string>
     <string name="write">Write</string>
     <string name="write_diary_image">write diary image</string>
@@ -53,6 +54,7 @@
     <string name="change_password_is_success">Change password is success</string>
     <string name="clear_your_mind">Clear your mind</string>
     <string name="back_image">back image</string>
+    <string name="search_image">search image</string>
     <string name="what_happened_today">What happened today?</string>
     <string name="type_to_write">Type to write</string>
     <string name="characters_left">characters left</string>
@@ -63,4 +65,27 @@
     <string name="add_new_tag">Add new tag</string>
     <string name="new_tag">New tag</string>
     <string name="login_image">Sign in image</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="default_info_title">North Jakarta</string>
+    <string name="default_info_snippet">Warakas, North Jakarta</string>
+    <string name="your_current_location">Your current location</string>
+    <string name="pick_location">Pick location</string>
+    <string name="maps">Maps</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_library">Choose from library</string>
+    <string name="delete_photo">Delete Photo</string>
+    <string name="tag_already_exists">Tag already exists</string>
+    <string name="delete_tag">Delete Tag</string>
+    <string name="tag">Tag</string>
+    <string name="new_diary">New Diary</string>
+    <string name="diary_must_be_filled">Diary must be filled</string>
+    <string name="download_in_progress">Download in progress</string>
+    <string name="upload_file">Upload file</string>
+    <string name="all_memories">All memories</string>
+    <string name="on_this_day">On this day</string>
+    <string name="memory_not_available">Memory not available</string>
+    <string name="update_memory">Update Memory</string>
+    <string name="delete_memory">Delete Memory</string>
+    <string name="share_memory">Share Memory</string>
+    <string name="are_you_sure">Are you sure?</string>
 </resources>

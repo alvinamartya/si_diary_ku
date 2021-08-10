@@ -8,11 +8,11 @@ import androidx.lifecycle.LifecycleOwner;
 
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.LoginModel;
-import id.ac.astra.polman.sidiaryku.ui.activity.MainActivity;
+import id.ac.astra.polman.sidiaryku.ui.activity.main.MainActivity;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginViewModel;
-import id.ac.astra.polman.sidiaryku.utils.MoveView;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
+import id.ac.astra.polman.sidiaryku.utils.MoveViewHelper;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class SplashScreenViewModel {
     private final static String TAG = SplashScreenViewModel.class.getSimpleName();
@@ -20,8 +20,8 @@ public class SplashScreenViewModel {
     public void checkLogin(Activity activity) {
         LoginViewModel loginViewModel = new LoginViewModel();
 
-        Preference preference = new Preference(activity);
-        UserEntity userEntity = preference.getUser();
+        PreferenceHelper preferenceHelper = new PreferenceHelper(activity);
+        UserEntity userEntity = preferenceHelper.getUser();
 
         // move to next screen
         if (userEntity != null) {
@@ -32,15 +32,15 @@ public class SplashScreenViewModel {
                     .login(activity, loginModel)
                     .observe((LifecycleOwner) activity, responseModel -> {
                         if (responseModel.isSuccess()) {
-                            MoveView.withFinish(activity, MainActivity.class);
+                            MoveViewHelper.withFinish(activity, MainActivity.class);
                         } else {
-                            MoveView.withFinish(activity, LoginActivity.class);
+                            MoveViewHelper.withFinish(activity, LoginActivity.class);
                         }
                     });
         } else {
             // move to login with delay 5 sec
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                        MoveView.withFinish(activity, LoginActivity.class);
+                        MoveViewHelper.withFinish(activity, LoginActivity.class);
                     },
                     5000);
         }

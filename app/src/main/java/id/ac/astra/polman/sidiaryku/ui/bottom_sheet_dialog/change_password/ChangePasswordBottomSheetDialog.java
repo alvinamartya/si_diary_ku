@@ -19,7 +19,7 @@ import java.util.Objects;
 import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.databinding.BottomSheetDialogChangePasswordBinding;
 import id.ac.astra.polman.sidiaryku.model.ChangePasswordModel;
-import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
+import id.ac.astra.polman.sidiaryku.utils.PopupMessageHelper;
 
 public class ChangePasswordBottomSheetDialog extends BottomSheetDialogFragment {
 
@@ -65,7 +65,7 @@ public class ChangePasswordBottomSheetDialog extends BottomSheetDialogFragment {
                             dismiss();
                         }
 
-                        PopupMessage.show(this.getContext(), title, responseModel.getMessage());
+                        PopupMessageHelper.show(this.getContext(), title, responseModel.getMessage());
                     });
         });
     }

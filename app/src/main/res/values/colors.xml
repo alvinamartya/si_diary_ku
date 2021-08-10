@@ -12,4 +12,6 @@
     <color name="primary_color">#3C5186</color>
     <color name="second_color">#78DEC7</color>
     <color name="profile_icon_color">#555</color>
+    <color name="dark_gray">#615E5E</color>
+    <color name="date_font_color">#FFAA4C</color>
 </resources>

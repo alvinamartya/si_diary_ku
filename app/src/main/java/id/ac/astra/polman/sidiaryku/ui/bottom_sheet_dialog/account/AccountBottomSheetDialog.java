@@ -21,8 +21,8 @@ import id.ac.astra.polman.sidiaryku.databinding.BottomSheetDialogAccountBinding;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
 import id.ac.astra.polman.sidiaryku.model.AccountModel;
 import id.ac.astra.polman.sidiaryku.ui.fragment.profile.ProfileViewModel;
-import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
+import id.ac.astra.polman.sidiaryku.utils.PopupMessageHelper;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class AccountBottomSheetDialog extends BottomSheetDialogFragment {
 
@@ -43,8 +43,8 @@ public class AccountBottomSheetDialog extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Preference preference = new Preference(this.requireContext());
-        UserEntity userEntity = preference.getUser();
+        PreferenceHelper preferenceHelper = new PreferenceHelper(this.requireContext());
+        UserEntity userEntity = preferenceHelper.getUser();
         binding.setViewModel(new ViewModelProvider(this).get(AccountViewModel.class));
 
         // binding old data to all fields
@@ -80,12 +80,12 @@ public class AccountBottomSheetDialog extends BottomSheetDialogFragment {
                             // change data in preference
                             userEntity.setNote(note);
                             userEntity.setName(name);
-                            preference.setUser(userEntity);
+                            preferenceHelper.setUser(userEntity);
 
                             // dismiss
                             closeDialog();
                         } else {
-                            PopupMessage.show(this.getContext(), title, responseModel.getMessage());
+                            PopupMessageHelper.show(this.getContext(), title, responseModel.getMessage());
                         }
                     });
         });

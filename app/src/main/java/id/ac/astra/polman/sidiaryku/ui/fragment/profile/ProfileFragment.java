@@ -19,8 +19,8 @@ import id.ac.astra.polman.sidiaryku.databinding.FragmentProfileBinding;
 import id.ac.astra.polman.sidiaryku.ui.activity.login.LoginActivity;
 import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.account.AccountBottomSheetDialog;
 import id.ac.astra.polman.sidiaryku.ui.bottom_sheet_dialog.change_password.ChangePasswordBottomSheetDialog;
-import id.ac.astra.polman.sidiaryku.utils.MoveView;
-import id.ac.astra.polman.sidiaryku.utils.PopupMessage;
+import id.ac.astra.polman.sidiaryku.utils.MoveViewHelper;
+import id.ac.astra.polman.sidiaryku.utils.PopupMessageHelper;
 
 public class ProfileFragment extends Fragment {
 
@@ -62,13 +62,13 @@ public class ProfileFragment extends Fragment {
         });
 
         // logout layout is clicked
-        binding.logoutProfileLayout.setOnClickListener(v -> PopupMessage.confirm(
+        binding.logoutProfileLayout.setOnClickListener(v -> PopupMessageHelper.confirm(
                 getContext(),
                 getString(R.string.logout),
                 getString(R.string.are_you_sure),
                 (successDialog, which) -> {
                     binding.getViewModel().logout(getActivity());
-                    MoveView.withFinish(getContext(), LoginActivity.class);
+                    MoveViewHelper.withFinish(getContext(), LoginActivity.class);
                 },
                 (failedDialog, which) -> {
                     // do nothing

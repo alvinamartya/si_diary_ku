@@ -19,8 +19,8 @@ import id.ac.astra.polman.sidiaryku.model.ResponseModel;
 import id.ac.astra.polman.sidiaryku.model.SignUpModel;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAnalyticsHelper;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
-import id.ac.astra.polman.sidiaryku.utils.Validation;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
+import id.ac.astra.polman.sidiaryku.utils.ValidationHelper;
 
 public class SignUpViewModel extends ViewModel {
     private final static String TAG = SignUpViewModel.class.getSimpleName();
@@ -44,7 +44,7 @@ public class SignUpViewModel extends ViewModel {
             signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.repeat_password_is_empty)));
         } else if (signUpModel.getName().isEmpty()) {
             signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.name_is_empty)));
-        } else if (!Validation.matchEmail(signUpModel.getEmail())) {
+        } else if (!ValidationHelper.matchEmail(signUpModel.getEmail())) {
             signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.invalid_email)));
         } else if (!signUpModel.getPassword().equals(signUpModel.getRepeatPassword())) {
             signUpLiveData.postValue(new ResponseModel(false, activity.getString(R.string.password_and_repeat_password_is_not_same)));
@@ -69,7 +69,7 @@ public class SignUpViewModel extends ViewModel {
                                     .document(signUpModel.getEmail())
                                     .set(user)
                                     .addOnSuccessListener(doc -> {
-                                        new Preference(activity).setUser(new UserEntity(
+                                        new PreferenceHelper(activity).setUser(new UserEntity(
                                                 signUpModel.getEmail(),
                                                 signUpModel.getPassword(),
                                                 signUpModel.getName(),

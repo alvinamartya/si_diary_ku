@@ -19,7 +19,7 @@ import id.ac.astra.polman.sidiaryku.model.LoginModel;
 import id.ac.astra.polman.sidiaryku.model.ResponseModel;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAnalyticsHelper;
 import id.ac.astra.polman.sidiaryku.utils.FirebaseAuthHelper;
-import id.ac.astra.polman.sidiaryku.utils.Preference;
+import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class LoginViewModel extends ViewModel {
     private final static String TAG = LoginViewModel.class.getSimpleName();
@@ -54,7 +54,7 @@ public class LoginViewModel extends ViewModel {
                                     .addOnCompleteListener(task -> {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot snapshot = task.getResult();
-                                            new Preference(activity).setUser(new UserEntity(
+                                            new PreferenceHelper(activity).setUser(new UserEntity(
                                                     loginModel.getEmail(),
                                                     loginModel.getPassword(),
                                                     snapshot != null ? snapshot.getString("name") : "",

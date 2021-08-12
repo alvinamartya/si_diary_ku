@@ -13,7 +13,11 @@
         android:id="@+id/navigation_memory"
         android:name="id.ac.astra.polman.sidiaryku.ui.fragment.memory.MemoryFragment"
         android:label="memory_fragment"
-        tools:layout="@layout/fragment_memory" />
+        tools:layout="@layout/fragment_memory" >
+        <action
+            android:id="@+id/action_navigation_memory_to_editDiaryFragment"
+            app:destination="@id/editDiaryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_diary"
         android:name="id.ac.astra.polman.sidiaryku.ui.fragment.diary.DiaryFragment"
@@ -30,6 +34,14 @@
         tools:layout="@layout/fragment_new_diary" >
         <action
             android:id="@+id/action_newDiaryFragment_to_navigation_memory"
+            app:destination="@id/navigation_memory" />
+    </fragment>
+    <fragment
+        android:id="@+id/editDiaryFragment"
+        android:name="id.ac.astra.polman.sidiaryku.ui.fragment.edit_diary.EditDiaryFragment"
+        android:label="EditDiaryFragment" >
+        <action
+            android:id="@+id/action_editDiaryFragment_to_navigation_memory"
             app:destination="@id/navigation_memory" />
     </fragment>
 </navigation>

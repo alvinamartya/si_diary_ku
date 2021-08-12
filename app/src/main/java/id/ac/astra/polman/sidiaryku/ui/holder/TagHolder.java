@@ -38,10 +38,8 @@ public class TagHolder extends RecyclerView.ViewHolder {
                         if (items[i].toString().equals(context.getString(R.string.delete_tag))) {
                             TagDao.initialize();
                             TagDao.removeTagLiveData(tagText.getText().toString());
-                            dialog.dismiss();
-                        } else {
-                            dialog.dismiss();
                         }
+                        dialog.dismiss();
                     })
                     .show();
         });

@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import id.ac.astra.polman.sidiaryku.dao.DiaryDao;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
-import id.ac.astra.polman.sidiaryku.model.DiaryModel;
+import id.ac.astra.polman.sidiaryku.entity.DiaryEntity;
 
 public class FirebaseStorageHelper {
     private static final String TAG = FirebaseStorageHelper.class.getSimpleName();
@@ -28,14 +28,14 @@ public class FirebaseStorageHelper {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        StorageReference ref = firebaseStorage.getReference(docId+".jpeg");
+        StorageReference ref = firebaseStorage.getReference(docId + ".jpeg");
         UploadTask uploadTask = ref.putBytes(data);
         uploadTask
                 .addOnProgressListener(snapshot -> {
                     double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
                     DiaryDao.initialize();
-                    DiaryModel selectedDiary = DiaryDao.setProgress(docId, (int)progress);
-                    if(selectedDiary != null) DiaryDao.updateDiaryLiveData(selectedDiary);
+                    DiaryEntity selectedDiary = DiaryDao.setProgress(docId, (int) progress);
+                    if (selectedDiary != null) DiaryDao.updateDiaryLiveData(selectedDiary);
                 })
                 .continueWithTask(task -> {
                     if (!task.isSuccessful()) {
@@ -61,7 +61,10 @@ public class FirebaseStorageHelper {
                                 .update(diary)
                                 .addOnCompleteListener(task2 -> {
                                     if (task2.isSuccessful()) {
-                                        Log.e(TAG, "uploadStorage: success");
+                                        DiaryDao.initialize();
+                                        DiaryEntity selectedDiary = DiaryDao.setImage(docId, downloadUri.toString());
+                                        if (selectedDiary != null) DiaryDao.updateDiaryLiveData(selectedDiary);
+                                        Log.i(TAG, "uploadStorage: success");
                                     } else {
                                         Log.e(TAG, "uploadStorage: " + Objects.requireNonNull(task2.getException()).getLocalizedMessage());
                                     }

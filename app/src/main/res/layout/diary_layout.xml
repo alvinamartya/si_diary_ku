@@ -31,12 +31,11 @@
         app:layout_constraintTop_toBottomOf="@id/date_diary_text"
         tools:text="Warakas, Jakarta Utara" />
 
-
     <ImageView
         android:id="@+id/picture_diary_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/picture_new_diary_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

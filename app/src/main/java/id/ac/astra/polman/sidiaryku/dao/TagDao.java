@@ -1,5 +1,7 @@
 package id.ac.astra.polman.sidiaryku.dao;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TagDao {
+    private final static String TAG = TagDao.class.getSimpleName();
     private static TagDao INSTANCE;
     private static final MutableLiveData<List<String>> tagMutableLiveData = new MutableLiveData<>(new ArrayList<>());
 
@@ -33,11 +36,20 @@ public class TagDao {
             tagMutableLiveData.postValue(tagList);
         }
     }
+    public static void addTagLiveListData(List<String> tags) {
+        List<String> tagList = tagMutableLiveData.getValue();
+        if(tagList != null) {
+            tagList.addAll(tags);
+            tagMutableLiveData.postValue(tagList);
+        }
+    }
 
     public static void removeTagLiveData(String tag) {
         List<String> tagList = tagMutableLiveData.getValue();
         if(tagList != null) {
-            tagList.remove(tag);
+            String removeTag = tag.substring(1);
+            Log.e(TAG, "removeTagLiveData: " + removeTag );
+            tagList.remove(removeTag);
             tagMutableLiveData.postValue(tagList);
         }
     }

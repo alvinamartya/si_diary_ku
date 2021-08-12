@@ -1,8 +1,8 @@
-package id.ac.astra.polman.sidiaryku.model;
+package id.ac.astra.polman.sidiaryku.entity;
 
 import java.util.List;
 
-public class DiaryModel {
+public class DiaryEntity {
     private String id;
     private String address;
     private String date;
@@ -11,7 +11,7 @@ public class DiaryModel {
     private List<String> tagList;
     private int progress;
 
-    public DiaryModel(String id, String address, String date, String diary, String imageUrl, List<String> tagList, int progress) {
+    public DiaryEntity(String id, String address, String date, String diary, String imageUrl, List<String> tagList, int progress) {
         this.id = id;
         this.address = address;
         this.date = date;
@@ -21,7 +21,7 @@ public class DiaryModel {
         this.progress = progress;
     }
 
-    public DiaryModel() {
+    public DiaryEntity() {
     }
 
     public String getId() {

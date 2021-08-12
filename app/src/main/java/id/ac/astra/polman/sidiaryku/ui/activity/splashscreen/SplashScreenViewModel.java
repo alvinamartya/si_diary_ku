@@ -19,7 +19,6 @@ public class SplashScreenViewModel {
 
     public void checkLogin(Activity activity) {
         LoginViewModel loginViewModel = new LoginViewModel();
-
         PreferenceHelper preferenceHelper = new PreferenceHelper(activity);
         UserEntity userEntity = preferenceHelper.getUser();
 

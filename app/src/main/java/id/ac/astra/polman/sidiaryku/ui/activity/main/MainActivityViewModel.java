@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import id.ac.astra.polman.sidiaryku.dao.DiaryDao;
 import id.ac.astra.polman.sidiaryku.entity.UserEntity;
-import id.ac.astra.polman.sidiaryku.model.DiaryModel;
+import id.ac.astra.polman.sidiaryku.entity.DiaryEntity;
 import id.ac.astra.polman.sidiaryku.utils.PreferenceHelper;
 
 public class MainActivityViewModel extends ViewModel {
@@ -25,7 +25,6 @@ public class MainActivityViewModel extends ViewModel {
         UserEntity userEntity = preferenceHelper.getUser();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         db
                 .collection("users")
                 .document(userEntity.getEmail())
@@ -34,7 +33,8 @@ public class MainActivityViewModel extends ViewModel {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DiaryDao.initialize();
-                        List<DiaryModel> diaryModels = new ArrayList<>();
+                        DiaryDao.clearDiaryLiveData();
+                        List<DiaryEntity> diaryEntities = new ArrayList<>();
                         List<DocumentSnapshot> documentSnapshotList = task.getResult().getDocuments();
                         documentSnapshotList.forEach(x -> {
                             String id = x.getId();
@@ -44,9 +44,9 @@ public class MainActivityViewModel extends ViewModel {
                             String imageUrl = x.getString("imageUrl") == null ? "" : x.getString("imageUrl");
                             List<String> tagList = (List<String>)x.get("tag_list");
 
-                            diaryModels.add(new DiaryModel(id, address, date, diary, imageUrl, tagList, 100));
+                            diaryEntities.add(new DiaryEntity(id, address, date, diary, imageUrl, tagList, 100));
                         });
-                        DiaryDao.addAllDiaryLiveData(diaryModels);
+                        DiaryDao.addAllDiaryLiveData(diaryEntities);
                     } else {
                         Log.e(TAG, "loadDiary: " + Objects.requireNonNull(task.getException()).getLocalizedMessage());
                     }

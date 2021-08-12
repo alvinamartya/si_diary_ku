@@ -11,21 +11,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import id.ac.astra.polman.sidiaryku.model.DiaryModel;
+import id.ac.astra.polman.sidiaryku.entity.DiaryEntity;
 import id.ac.astra.polman.sidiaryku.ui.fragment.memory.MemoryViewModel;
 import id.ac.astra.polman.sidiaryku.ui.holder.DiaryHolder;
 import id.ac.astra.polman.sidiaryku.ui.holder.ProgressDiaryHolder;
 
 public class DiaryAdapter extends RecyclerView.Adapter {
     private Context context;
-    private List<DiaryModel> diaryModelList;
+    private List<DiaryEntity> diaryEntityList;
     private MemoryViewModel memoryViewModel;
     private final static int full_key = 100;
     private final static int progress_key = 101;
 
-    public DiaryAdapter(Context context, List<DiaryModel> diaryModelList, MemoryViewModel memoryViewModel) {
+    public DiaryAdapter(Context context, List<DiaryEntity> diaryEntityList, MemoryViewModel memoryViewModel) {
         this.context = context;
-        this.diaryModelList = diaryModelList;
+        this.diaryEntityList = diaryEntityList;
         this.memoryViewModel = memoryViewModel;
     }
 
@@ -43,22 +43,22 @@ public class DiaryAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-        DiaryModel diaryModel = diaryModelList.get(position);
-        if (diaryModel.getProgress() < 100)
-            ((ProgressDiaryHolder) holder).bind(diaryModel);
+        DiaryEntity diaryEntity = diaryEntityList.get(position);
+        if (diaryEntity.getProgress() < 100)
+            ((ProgressDiaryHolder) holder).bind(diaryEntity);
         else
-            ((DiaryHolder) holder).bind(context, diaryModel, memoryViewModel);
+            ((DiaryHolder) holder).bind(context, diaryEntity, memoryViewModel);
     }
 
     @Override
     public int getItemCount() {
-        return diaryModelList.size();
+        return diaryEntityList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        DiaryModel diaryModel = diaryModelList.get(position);
-        if (diaryModel.getProgress() < 100) return progress_key;
+        DiaryEntity diaryEntity = diaryEntityList.get(position);
+        if (diaryEntity.getProgress() < 100) return progress_key;
         else return full_key;
     }
 }

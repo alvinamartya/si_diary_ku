@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import id.ac.astra.polman.sidiaryku.R;
-import id.ac.astra.polman.sidiaryku.model.DiaryModel;
+import id.ac.astra.polman.sidiaryku.entity.DiaryEntity;
 
 public class ProgressDiaryHolder extends RecyclerView.ViewHolder {
     private final TextView dateDiaryText;
@@ -20,8 +20,8 @@ public class ProgressDiaryHolder extends RecyclerView.ViewHolder {
         progressDiary = itemView.findViewById(R.id.diary_progress);
     }
 
-    public void bind(DiaryModel diaryModel) {
-        dateDiaryText.setText(diaryModel.getDate());
-        progressDiary.setProgress(diaryModel.getProgress());
+    public void bind(DiaryEntity diaryEntity) {
+        dateDiaryText.setText(diaryEntity.getDate());
+        progressDiary.setProgress(diaryEntity.getProgress());
     }
 }

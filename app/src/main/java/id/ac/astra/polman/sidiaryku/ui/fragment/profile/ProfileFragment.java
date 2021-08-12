@@ -42,7 +42,10 @@ public class ProfileFragment extends Fragment {
 
         binding.getViewModel().loadUser(this.getContext());
         binding.getViewModel().getUser().observe(this.getViewLifecycleOwner(), userEntity -> {
-            String note = userEntity.getNote().equals("") ? getString(R.string.we_hope_you_always_happy) : userEntity.getNote();
+            String note = "";
+            if (userEntity.getNote() == null || userEntity.getNote().equals(""))
+                note = getString(R.string.we_hope_you_always_happy);
+            else note = userEntity.getNote();
             binding.nameProfileText.setText(userEntity.getName());
             binding.noteProfileText.setText(note);
         });

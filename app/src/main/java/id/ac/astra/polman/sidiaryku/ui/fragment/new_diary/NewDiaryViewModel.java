@@ -55,7 +55,7 @@ public class NewDiaryViewModel extends ViewModel {
             PopupMessageHelper
                     .show(context, title, diaryMustBeFilled);
         } else {
-            String date = DateHelper.getCurrentDate("yyyy-MM-dd HH:mm:ss");
+            String date = DateHelper.getCurrentDate("dd MMM yyyy");
 
             Map<String, Object> diary = new HashMap<>();
             diary.put("diary", newDiaryModel.getDiary());

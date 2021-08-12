@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_navigation_memory_to_editDiaryFragment"
             app:destination="@id/editDiaryFragment" />
+        <action
+            android:id="@+id/action_navigation_memory_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_diary"
@@ -44,4 +47,8 @@
             android:id="@+id/action_editDiaryFragment_to_navigation_memory"
             app:destination="@id/navigation_memory" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="id.ac.astra.polman.sidiaryku.ui.fragment.search.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>

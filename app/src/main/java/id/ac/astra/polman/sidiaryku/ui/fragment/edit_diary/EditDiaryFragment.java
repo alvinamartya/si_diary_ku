@@ -206,40 +206,16 @@ public class EditDiaryFragment extends Fragment {
             }
         });
 
-        // set place
-        PlaceDao.initialize();
-        PlaceDao.getPlaceLiveData().observe(this.getViewLifecycleOwner(), place -> {
-            if (place == null && address.equals("")) {
-                binding.addressEditDiaryText.setVisibility(View.GONE);
-            } else {
-                if(place != null) binding.addressEditDiaryText.setText(place.getAddress());
-                binding.addressEditDiaryText.setVisibility(View.VISIBLE);
-            }
-        });
-
-        // set image
-        binding.getViewModel().getImageLiveData().observe(this.getViewLifecycleOwner(), bitmap -> {
-            if (bitmap == null) {
-                isHasImage = false;
-                binding.pictureEditDiaryImage.setVisibility(View.GONE);
-            } else {
-                isHasImage = true;
-                binding.pictureEditDiaryImage.setImageBitmap(bitmap);
-                binding.pictureEditDiaryImage.setVisibility(View.VISIBLE);
-            }
-        });
-
         // set horizontal layout manager
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.tagRecyclerView.setLayoutManager(horizontalLayoutManager);
 
         // set list tag to recyclerview
         TagDao.getTagLiveData().observe(this.getViewLifecycleOwner(), tagList -> {
-            Log.e(TAG, "onViewCreated: " + tagList.size());
             if (tagList.size() <= 0) {
                 binding.tagRecyclerView.setVisibility(View.GONE);
             } else {
-                binding.tagRecyclerView.setAdapter(new TagAdapter(this.requireContext(), tagList));
+                binding.tagRecyclerView.setAdapter(new TagAdapter(this.requireContext(), tagList, true));
                 binding.tagRecyclerView.setVisibility(View.VISIBLE);
             }
         });
@@ -249,7 +225,6 @@ public class EditDiaryFragment extends Fragment {
             String address = binding.addressEditDiaryText.getText().toString();
             String diary = Objects.requireNonNull(binding.typeWriteEditDiaryText.getText()).toString();
             List<String> tagList = TagDao.getTagLiveData().getValue();
-            Log.e(TAG, "onViewCreated: " + new Gson().toJson(tagList));
             Bitmap bitmap = isHasImage ? binding.getViewModel().getImageLiveData().getValue() : null;
             NewDiaryModel newDiaryModel = new NewDiaryModel(
                     diary,

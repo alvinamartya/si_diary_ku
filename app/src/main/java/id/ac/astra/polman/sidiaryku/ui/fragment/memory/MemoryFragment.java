@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import id.ac.astra.polman.sidiaryku.R;
 import id.ac.astra.polman.sidiaryku.dao.DiaryDao;
 import id.ac.astra.polman.sidiaryku.databinding.FragmentMemoryBinding;
 import id.ac.astra.polman.sidiaryku.entity.DiaryEntity;
@@ -38,6 +40,11 @@ public class MemoryFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.setViewModel(new ViewModelProvider(this).get(MemoryViewModel.class));
+        binding.searchMemoryImage.setOnClickListener(v-> {
+            Navigation
+                    .findNavController(v)
+                    .navigate(R.id.action_navigation_memory_to_searchFragment);
+        });
         binding.allMemoriesButton.setOnClickListener(v -> {
             setEnabledAllMemoriesButton(false);
             refreshDiaryModel();
@@ -51,7 +58,7 @@ public class MemoryFragment extends Fragment {
             if (!isAllTimeMemory) {
                 List<DiaryEntity> onThisDiaryDaoList = diaryModelList
                         .stream()
-                        .filter(x -> x.getDate().contains(DateHelper.getCurrentDate("yyyy-MM-dd")))
+                        .filter(x -> x.getDate().contains(DateHelper.getCurrentDate("dd MMM yyyy")))
                         .collect(Collectors.toList());
                 tempDiaryList.addAll(onThisDiaryDaoList);
             } else {
@@ -59,7 +66,7 @@ public class MemoryFragment extends Fragment {
             }
 
             layoutCondition(!tempDiaryList.isEmpty());
-            binding.listMemoryRv.setAdapter(new DiaryAdapter(this.requireContext(), tempDiaryList, binding.getViewModel()));
+            binding.listMemoryRv.setAdapter(new DiaryAdapter(this.requireContext(), tempDiaryList));
         });
     }
 

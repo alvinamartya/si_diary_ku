@@ -14,6 +14,7 @@
         android:id="@+id/memories_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
         android:paddingTop="20dp"
         tools:context=".ui.fragment.memory.MemoryFragment">
 
@@ -73,6 +74,15 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/line_memory"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/filter_memory_layout" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_memory_rv"
             android:layout_width="match_parent"
@@ -83,9 +93,10 @@
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_memory_layout"
+            app:layout_constraintTop_toBottomOf="@id/line_memory"
             tools:layout="@layout/diary_layout"
             tools:visibility="gone" />
+
 
         <LinearLayout
             android:id="@+id/empty_memory_layout"
@@ -94,7 +105,7 @@
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_memory_layout"
+            app:layout_constraintTop_toBottomOf="@id/line_memory"
             tools:visibility="visible">
 
             <TextView

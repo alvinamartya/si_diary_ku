@@ -2,6 +2,7 @@ package id.ac.astra.polman.sidiaryku.ui.holder;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,12 +42,12 @@ public class DiaryHolder extends RecyclerView.ViewHolder {
         memoryLayout = itemView.findViewById(R.id.memory_layout);
     }
 
-    public void bind(Context context, DiaryEntity diaryEntity, MemoryViewModel viewModel) {
+    public void bind(Context context, DiaryEntity diaryEntity) {
+        MemoryViewModel viewModel = new MemoryViewModel();
         dateDiaryText.setText(diaryEntity.getDate());
         diaryText.setText(diaryEntity.getDiary());
 
         // diary doesn't have address
-        Log.e(TAG, "bind: " + diaryEntity.getAddress());
         if (diaryEntity.getAddress() == null || diaryEntity.getAddress().equals(""))
             addressDiaryText.setVisibility(View.GONE);
         else
@@ -74,7 +75,8 @@ public class DiaryHolder extends RecyclerView.ViewHolder {
         else {
             LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             tagRecyclerView.setLayoutManager(horizontalLayoutManager);
-            tagRecyclerView.setAdapter(new TagAdapter(context, diaryEntity.getTagList()));
+            tagRecyclerView.setEnabled(false);
+            tagRecyclerView.setAdapter(new TagAdapter(context, diaryEntity.getTagList(), false));
         }
 
         memoryLayout.setOnClickListener(v -> {
@@ -101,6 +103,17 @@ public class DiaryHolder extends RecyclerView.ViewHolder {
                         } else if (items[i].toString().equals(context.getString(R.string.delete_memory))) {
                             viewModel.deleteMemory(context, diaryEntity.getId());
                         } else if (items[i].toString().equals(context.getString(R.string.share_memory))) {
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setType("text/plain");
+
+                            String yourDiary = context.getString(R.string.your_diary);
+                            String sendText = yourDiary + ": " + diaryEntity.getDate() + ",\n" + diaryEntity.getDiary();
+                            if (diaryEntity.getImageUrl() != null && !diaryEntity.getImageUrl().equals(""))
+                                sendText += " " + context.getString(R.string.see_you_photo_diary_here) + " " + diaryEntity.getImageUrl();
+
+                            intent.putExtra(Intent.EXTRA_TEXT, sendText);
+                            intent.putExtra(Intent.EXTRA_SUBJECT, yourDiary);
+                            context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_via)));
                         } else {
                             dialog.dismiss();
                         }

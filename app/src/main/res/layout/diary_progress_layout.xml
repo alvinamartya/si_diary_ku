@@ -12,7 +12,7 @@
         android:id="@+id/date_diary_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/date_font_color"
+        android:textColor="@color/primary_color"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Two years ago" />

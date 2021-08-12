@@ -23,25 +23,29 @@ public class TagHolder extends RecyclerView.ViewHolder {
     }
 
     @SuppressLint("SetTextI18n")
-    public void bind(Context context, String title, String tag) {
+    public void bind(Context context, String title, String tag, boolean editable) {
         tagText.setText("#" + tag);
-        tagText.setOnClickListener(view -> {
-            CharSequence[] items = {
-                    context.getString(R.string.delete_tag),
-                    context.getString(R.string.cancel)
-            };
+        if(editable) {
+            tagText.setOnClickListener(view -> {
+                CharSequence[] items = {
+                        context.getString(R.string.delete_tag),
+                        context.getString(R.string.cancel)
+                };
 
-            new AlertDialog
-                    .Builder(context)
-                    .setTitle(title)
-                    .setItems(items, (dialog, i) -> {
-                        if (items[i].toString().equals(context.getString(R.string.delete_tag))) {
-                            TagDao.initialize();
-                            TagDao.removeTagLiveData(tagText.getText().toString());
-                        }
-                        dialog.dismiss();
-                    })
-                    .show();
-        });
+                new AlertDialog
+                        .Builder(context)
+                        .setTitle(title)
+                        .setItems(items, (dialog, i) -> {
+                            if (items[i].toString().equals(context.getString(R.string.delete_tag))) {
+                                TagDao.initialize();
+                                TagDao.removeTagLiveData(tagText.getText().toString());
+                            }
+                            dialog.dismiss();
+                        })
+                        .show();
+            });
+        } else {
+            tagText.setEnabled(false);
+        }
     }
 }

@@ -13,20 +13,19 @@ import java.util.List;
 
 import id.ac.astra.polman.sidiaryku.entity.DiaryEntity;
 import id.ac.astra.polman.sidiaryku.ui.fragment.memory.MemoryViewModel;
+import id.ac.astra.polman.sidiaryku.ui.fragment.search.SearchViewModel;
 import id.ac.astra.polman.sidiaryku.ui.holder.DiaryHolder;
 import id.ac.astra.polman.sidiaryku.ui.holder.ProgressDiaryHolder;
 
 public class DiaryAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<DiaryEntity> diaryEntityList;
-    private MemoryViewModel memoryViewModel;
     private final static int full_key = 100;
     private final static int progress_key = 101;
 
-    public DiaryAdapter(Context context, List<DiaryEntity> diaryEntityList, MemoryViewModel memoryViewModel) {
+    public DiaryAdapter(Context context, List<DiaryEntity> diaryEntityList) {
         this.context = context;
         this.diaryEntityList = diaryEntityList;
-        this.memoryViewModel = memoryViewModel;
     }
 
     @NonNull
@@ -47,7 +46,7 @@ public class DiaryAdapter extends RecyclerView.Adapter {
         if (diaryEntity.getProgress() < 100)
             ((ProgressDiaryHolder) holder).bind(diaryEntity);
         else
-            ((DiaryHolder) holder).bind(context, diaryEntity, memoryViewModel);
+            ((DiaryHolder) holder).bind(context, diaryEntity);
     }
 
     @Override

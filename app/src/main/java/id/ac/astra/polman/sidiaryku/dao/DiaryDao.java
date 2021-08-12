@@ -34,7 +34,7 @@ public class DiaryDao {
 
     public static void clearDiaryLiveData() {
         List<DiaryEntity> diaryEntityList = new ArrayList<>();
-        diaryMutableLiveData.postValue(diaryEntityList);
+        diaryMutableLiveData.setValue(diaryEntityList);
     }
 
     public static void addDiaryLiveData(DiaryEntity diaryEntity) {
@@ -98,12 +98,13 @@ public class DiaryDao {
         List<DiaryEntity> diaryList = diaryMutableLiveData.getValue();
         DiaryEntity result = null;
         if (diaryList != null) {
-            Log.e(TAG, "getDiary: " + new Gson().toJson(diaryList));
             result = diaryList
                     .stream()
                     .filter(x -> x.getId().equals(docId))
                     .findFirst()
                     .orElse(null);
+            assert result != null;
+            Log.e(TAG, "getDiary: " + new Gson().toJson(result.getTagList()));
         }
         return result;
     }

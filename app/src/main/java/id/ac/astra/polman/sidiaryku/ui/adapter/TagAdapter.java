@@ -17,10 +17,12 @@ import id.ac.astra.polman.sidiaryku.ui.holder.TagHolder;
 public class TagAdapter extends RecyclerView.Adapter<TagHolder> {
     private Context context;
     private List<String> tagList;
+    private boolean editable;
 
-    public TagAdapter(Context context, List<String> tagList) {
+    public TagAdapter(Context context, List<String> tagList, boolean editable) {
         this.context = context;
         this.tagList = tagList;
+        this.editable = editable;
     }
 
     @NonNull
@@ -35,7 +37,7 @@ public class TagAdapter extends RecyclerView.Adapter<TagHolder> {
     public void onBindViewHolder(@NonNull @NotNull TagHolder holder, int position) {
         String tag = tagList.get(position);
         String title = context.getString(R.string.tag);
-        holder.bind(context, title, tag);
+        holder.bind(context, title, tag, editable);
     }
 
     @Override

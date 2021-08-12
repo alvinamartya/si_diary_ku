@@ -2,6 +2,7 @@ package id.ac.astra.polman.sidiaryku.ui.fragment.edit_diary;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -54,47 +55,47 @@ public class EditDiaryViewModel extends ViewModel {
             PopupMessageHelper
                     .show(context, title, diaryMustBeFilled);
         } else {
-            String date = DateHelper.getCurrentDate("yyyy-MM-dd HH:mm:ss");
+            DiaryEntity selectedDiaryEntity = DiaryDao.getDiary(docId);
+            if (selectedDiaryEntity != null) {
+                Map<String, Object> diary = new HashMap<>();
+                diary.put("diary", newDiaryModel.getDiary());
+                diary.put("address", newDiaryModel.getAddress());
+                Log.e(TAG, "saveDiary: " + newDiaryModel.getTagList() );
+                diary.put("tag_list", newDiaryModel.getTagList());
+                diary.put("date", selectedDiaryEntity.getDate());
+                if (selectedDiaryEntity.getImageUrl() != null && !selectedDiaryEntity.getImageUrl().equals(""))
+                    diary.put("imageUrl", selectedDiaryEntity.getImageUrl());
 
-            Map<String, Object> diary = new HashMap<>();
-            diary.put("diary", newDiaryModel.getDiary());
-            diary.put("address", newDiaryModel.getAddress());
-            diary.put("tag_list", newDiaryModel.getTagList());
-            diary.put("date", date);
-
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            PreferenceHelper preferenceHelper = new PreferenceHelper(context);
-            UserEntity userEntity = preferenceHelper.getUser();
-            db
-                    .collection("users")
-                    .document(userEntity.getEmail())
-                    .collection("diary")
-                    .document(docId)
-                    .set(diary)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            DiaryDao.initialize();
-                            int progres = 0;
-                            if (isHasImage) {
-                                FirebaseStorageHelper.uploadStorage(context, docId, newDiaryModel.getImage());
-                            } else {
-                                progres = 100;
-                            }
-
-                            DiaryEntity selectedDiaryEntity = DiaryDao.getDiary(docId);
-                            if(selectedDiaryEntity != null) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                PreferenceHelper preferenceHelper = new PreferenceHelper(context);
+                UserEntity userEntity = preferenceHelper.getUser();
+                db
+                        .collection("users")
+                        .document(userEntity.getEmail())
+                        .collection("diary")
+                        .document(docId)
+                        .set(diary)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                DiaryDao.initialize();
+                                int progress = isHasImage ? 0 : 100;
                                 selectedDiaryEntity.setAddress(newDiaryModel.getAddress());
                                 selectedDiaryEntity.setDiary(newDiaryModel.getDiary());
                                 selectedDiaryEntity.setTagList(newDiaryModel.getTagList());
-                                selectedDiaryEntity.setProgress(progres);
+                                selectedDiaryEntity.setProgress(progress);
                                 DiaryDao.updateDiaryLiveData(selectedDiaryEntity);
+
+                                if (isHasImage)
+                                    FirebaseStorageHelper.uploadStorage(context, docId, newDiaryModel.getImage());
+                                statuDiary.postValue(true);
+                            } else {
+                                PopupMessageHelper.show(context, title, Objects.requireNonNull(task.getException()).getLocalizedMessage());
                             }
-                            statuDiary.postValue(true);
-                        } else {
-                            PopupMessageHelper.show(context, title, Objects.requireNonNull(task.getException()).getLocalizedMessage());
-                        }
-                    })
-                    .addOnFailureListener(e -> PopupMessageHelper.show(context, title, e.getLocalizedMessage()));
+                        })
+                        .addOnFailureListener(e -> PopupMessageHelper.show(context, title, e.getLocalizedMessage()));
+            } else {
+                statuDiary.postValue(false);
+            }
         }
 
         return statuDiary;

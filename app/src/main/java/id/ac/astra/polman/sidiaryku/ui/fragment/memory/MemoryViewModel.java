@@ -24,11 +24,6 @@ public class MemoryViewModel extends ViewModel {
         return DiaryDao.getDiaryLiveData();
     }
 
-    public void refreshMemory() {
-        DiaryDao.initialize();
-        List<DiaryEntity> diaryEntities = DiaryDao.getDiaryLiveData().getValue();
-    }
-
     public void deleteMemory(Context context, String docId) {
         String title = context.getString(R.string.delete_memory);
         String message = context.getString(R.string.are_you_sure);

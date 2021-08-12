@@ -203,7 +203,7 @@ public class NewDiaryFragment extends Fragment {
             if (tagList.size() <= 0) {
                 binding.tagRecyclerView.setVisibility(View.GONE);
             } else {
-                binding.tagRecyclerView.setAdapter(new TagAdapter(this.requireContext(), tagList));
+                binding.tagRecyclerView.setAdapter(new TagAdapter(this.requireContext(), tagList, true));
                 binding.tagRecyclerView.setVisibility(View.VISIBLE);
             }
         });

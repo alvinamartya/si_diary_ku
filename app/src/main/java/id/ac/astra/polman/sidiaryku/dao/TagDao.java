@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.libraries.places.api.model.Place;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,33 +23,27 @@ public class TagDao {
     }
 
     public static void clearTagLiveData() {
-        List<String> tagList = tagMutableLiveData.getValue();
-        if(tagList != null) {
-            tagList.clear();
-            tagMutableLiveData.postValue(tagList);
-        }
+        tagMutableLiveData.postValue(new ArrayList<>());
     }
 
     public static void addTagLiveData(String tag) {
         List<String> tagList = tagMutableLiveData.getValue();
-        if(tagList != null) {
+        if (tagList != null) {
             tagList.add(tag);
             tagMutableLiveData.postValue(tagList);
         }
     }
+
     public static void addTagLiveListData(List<String> tags) {
-        List<String> tagList = tagMutableLiveData.getValue();
-        if(tagList != null) {
-            tagList.addAll(tags);
-            tagMutableLiveData.postValue(tagList);
-        }
+        Log.e(TAG, "addTagLiveListData: " + new Gson().toJson(tags));
+        tagMutableLiveData.setValue(tags);
     }
 
     public static void removeTagLiveData(String tag) {
         List<String> tagList = tagMutableLiveData.getValue();
-        if(tagList != null) {
+        if (tagList != null) {
             String removeTag = tag.substring(1);
-            Log.e(TAG, "removeTagLiveData: " + removeTag );
+            Log.e(TAG, "removeTagLiveData: " + removeTag);
             tagList.remove(removeTag);
             tagMutableLiveData.postValue(tagList);
         }
